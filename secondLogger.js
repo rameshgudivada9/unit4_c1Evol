@@ -22,6 +22,18 @@ app.get("/authors",(req,res)=>{
     return res.send([{ route: "/authors", permission: true}])
 });
 
+function checkPermission(req, res, next) {
+  if (req.path === "/libraries") {
+    req.role = "libraries";
+  } else if (req.path === "/authors") {
+    req.role = "authors";
+  } else {
+    req.role = "somebody";
+  }
+  console.log("author");
+  next();
+}
+
 
 
 
